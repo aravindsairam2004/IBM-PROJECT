@@ -60,6 +60,14 @@ class TaskTracker {
             }
         }
     }
+      public void removeTask(int index) {
+          if (index >= 0 && index < tasks.size()) {
+             Task removedTask = tasks.remove(index);
+            System.out.println("Task removed: " + removedTask.getDescription());
+        } else {
+            System.out.println("Invalid index. No task removed.");
+        }
+    }
 }
 
  class Main {
@@ -70,9 +78,11 @@ class TaskTracker {
         while (true) {
             System.out.println("\nTask Tracker Menu:");
             System.out.println("1. Add Task");
-            System.out.println("2. Mark Task as Completed");
-            System.out.println("3. Display Tasks");
-            System.out.println("4. Exit");
+            System.out.println("2. Remove Tasks");
+            System.out.println("3. Mark as completed");
+            System.out.println("4. Display Tasks");
+            System.out.println("5.Exit");
+             
 
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
@@ -85,14 +95,20 @@ class TaskTracker {
                     taskTracker.addTask(taskDescription);
                     break;
                 case 2:
+                    System.out.print("Enter the index of the task to remove: ");
+                    int indexToRemove = scanner.nextInt();
+                    scanner.nextLine(); // Consume the newline character
+                    taskTracker.removeTask(indexToRemove - 1); // Adjust index for display
+                    break;
+                case 3:
                     System.out.print("Enter the index of the task to mark as completed: ");
                     int taskIndex = scanner.nextInt();
                     taskTracker.markTaskAsCompleted(taskIndex - 1); // Adjust index to 0-based
                     break;
-                case 3:
+                case 4:
                     taskTracker.displayTasks();
                     break;
-                case 4:
+                case 5:
                     System.out.println("Exiting Task Tracker. Goodbye!");
                     System.exit(0);
                 default:
